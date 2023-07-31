@@ -138,14 +138,39 @@ p {
     display: block;
     position: absolute;
     top: 60px;
-    height: calc(100vh - 80px);
+    height: calc(95vh - 80px);
     width: 100%;
+    width: 95%;
+    margin: auto;
   }
 
   .story {
     display: none;
   }
   .active_story {
+    height: 100%;
+    width: 100%;
+    padding: 3px;
     display: block;
+    color: #eeeeee;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .story_button_container {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    top: 60px;
+    z-index: 9;
+    height: calc(95vh - 90px);
+  }
+
+  .left_tap,
+  .right_tap {
+    height: 100%;
+    width: 20%;
   }
 }

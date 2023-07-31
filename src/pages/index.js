@@ -82,6 +82,10 @@ export default function Home() {
         </div>
       </div>
       <div className="story_container">
+        <div className="story_button_container">
+          <div onClick={moveLeft} className="left_tap"></div>
+          <div onClick={moveRight} className="right_tap"></div>
+        </div>
         {keys.map((key, index) => (
           // show only current slide
           <div
