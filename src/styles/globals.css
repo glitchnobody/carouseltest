@@ -57,11 +57,20 @@ body {
   pointer-events: none;
 }
 
+.slide-left-2 {
+  filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-300px) scale(0.8) rotateY(-30deg);
+  z-index: 0;
+  pointer-events: none;
+}
+
 .slide-right {
   filter: blur(3.5px);
   display: flex;
   flex-direction: column;
-  transform: translateX(180px) scale(0.9) rotateY(15deg);
+  transform: translateX(150px) scale(0.9) rotateY(15deg);
   z-index: 1;
   pointer-events: none;
 }
@@ -116,8 +125,27 @@ p {
   padding: 0;
 }
 
+.story_container {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .carousel-container {
     display: none;
+  }
+
+  .story_container {
+    display: block;
+    position: absolute;
+    top: 60px;
+    height: calc(100vh - 80px);
+    width: 100%;
+  }
+
+  .story {
+    display: none;
+  }
+  .active_story {
+    display: block;
   }
 }

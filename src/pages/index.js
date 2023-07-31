@@ -25,6 +25,11 @@ export default function Home() {
     if (index === currentSlideIndex) {
       return "slide-middle";
     } else if (
+      index === currentSlideIndex - 2 ||
+      (currentSlideIndex === 0 && index === keys.length - 2 && keys.length < 2)
+    ) {
+      return "slide-left-2";
+    } else if (
       index === currentSlideIndex - 1 ||
       (currentSlideIndex === 0 && index === keys.length - 1 && keys.length < 1)
     ) {
@@ -76,7 +81,21 @@ export default function Home() {
           </button>
         </div>
       </div>
-      <div className="story_container"></div>
+      <div className="story_container">
+        {keys.map((key, index) => (
+          // show only current slide
+          <div
+            className={`story ${
+              index === currentSlideIndex ? "active_story" : ""
+            }`}
+            key={index}
+          >
+            <h2>{content[key].title}</h2>
+            <h3>{content[key].subtitle}</h3>
+            <p>{content[key].text}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
