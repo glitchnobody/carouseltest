@@ -21,61 +21,62 @@ export default function Home() {
   const isPrevButtonDisabled = currentSlideIndex === 0;
   const isNextButtonDisabled = currentSlideIndex === keys.length - 1;
 
+  const getSlideClass = (index) => {
+    if (index === currentSlideIndex) {
+      return "slide-middle";
+    } else if (
+      index === currentSlideIndex - 1 ||
+      (currentSlideIndex === 0 && index === keys.length - 1 && keys.length < 1)
+    ) {
+      return "slide-left";
+    } else if (
+      index === (currentSlideIndex + 1) % keys.length &&
+      keys.length > currentSlideIndex + 1
+    ) {
+      return "slide-right";
+    } else if (
+      index === (currentSlideIndex + 2) % keys.length &&
+      keys.length > currentSlideIndex + 2
+    ) {
+      return "slide-right-2";
+    } else {
+      return "";
+    }
+  };
+
   return (
     <div>
       <div className="carousel-container">
-        <div className="left-container">
-          {!isPrevButtonDisabled && (
-            <div className="carousel-slide slide-left" id="slide-left">
-              <h2>
-                {content[keys[(currentSlideIndex - 1) % keys.length]].title}
-              </h2>
-              <h3>
-                {content[keys[(currentSlideIndex - 1) % keys.length]].subtitle}
-              </h3>
-              <p>{content[keys[(currentSlideIndex - 1) % keys.length]].text}</p>
+        <div className="carousel-wrapper">
+          {keys.map((key, index) => (
+            <div
+              className={`carousel-slide ${getSlideClass(index)}`}
+              key={index}
+            >
+              <h2>{content[key].title}</h2>
+              <h3>{content[key].subtitle}</h3>
+              <p>{content[key].text}</p>
             </div>
-          )}
+          ))}
         </div>
-        <div className="middle-container">
-          <div className="carousel-slide slide-middle" id="slide-middle">
-            <h2>{content[keys[currentSlideIndex]].title}</h2>
-            <h3>{content[keys[currentSlideIndex]].subtitle}</h3>
-            <p>{content[keys[currentSlideIndex]].text}</p>
-          </div>
-        </div>
-
-        <div className="right-container">
-          {!isNextButtonDisabled && (
-            <div className="carousel-slide slide-right-1">
-              <h2>
-                {content[keys[(currentSlideIndex + 1) % keys.length]].title}
-              </h2>
-              <h3>
-                {content[keys[(currentSlideIndex + 1) % keys.length]].subtitle}
-              </h3>
-              <p>{content[keys[(currentSlideIndex + 1) % keys.length]].text}</p>
-            </div>
-          )}
-          {!isNextButtonDisabled && currentSlideIndex < keys.length - 2 && (
-            <div className="carousel-slide slide-right-2">
-              <h2>
-                {content[keys[(currentSlideIndex + 2) % keys.length]].title}
-              </h2>
-              <h3>
-                {content[keys[(currentSlideIndex + 2) % keys.length]].subtitle}
-              </h3>
-              <p>{content[keys[(currentSlideIndex + 2) % keys.length]].text}</p>
-            </div>
-          )}
+        <div className="carousel_indicators">
+          <button
+            className="left_button"
+            onClick={moveLeft}
+            disabled={isPrevButtonDisabled}
+          >
+            ←
+          </button>
+          <button
+            className="right_button"
+            onClick={moveRight}
+            disabled={isNextButtonDisabled}
+          >
+            →
+          </button>
         </div>
       </div>
-      <button onClick={moveLeft} disabled={isPrevButtonDisabled}>
-        Previous
-      </button>
-      <button onClick={moveRight} disabled={isNextButtonDisabled}>
-        Next
-      </button>
+      <div className="story_container"></div>
     </div>
   );
 }
